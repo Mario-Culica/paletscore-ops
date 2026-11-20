@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><title>PaletScore — Jurnal AI</title><link rel="stylesheet" href="doc.css">
+<style>.page { gap: 3mm; } .prompt { font-size: 9.4pt; } td, th { font-size: 8.8pt; padding: 1.3mm 2mm; }</style></head>
+<body><div class="page">
+  <div class="top">
+    <div class="brand"><svg width="26" height="26" viewBox="0 0 26 26"><rect width="26" height="26" rx="5" fill="#f6c300"/><g fill="#111214"><circle cx="8" cy="8" r="2.6"/><circle cx="13" cy="8" r="2.6"/><circle cx="18" cy="8" r="2.6"/><circle cx="8" cy="13" r="2.6"/><circle cx="13" cy="13" r="2.6"/><circle cx="18" cy="13" r="2.6"/><circle cx="8" cy="18" r="2.6"/><circle cx="13" cy="18" r="2.6"/></g></svg>PaletScore <small>OPS</small></div>
+    <div class="meta">AI-Powered Business Challenge 2026 · Tech-Con / paletizare UR20<br>Echipa [cod echipă] · Livrabil: Jurnal AI (1 pagină)</div>
+  </div>
+  <h1>Jurnal AI: <em>ce am cerut, ce am verificat</em></h1>
+
+  <div><h2>Instrumente</h2>
+  <table><thead><tr><th style="width:44mm">Instrument</th><th>La ce l-am folosit</th><th style="width:46mm">Cine decide</th></tr></thead><tbody>
+    <tr><td><b>Claude Code</b> (Claude Opus 5.5)</td><td>Rolurile muncitor/administrator, panoul de administrare, asistentul, redesign-ul, testarea în browser, publicarea pe GitHub Pages</td><td>Echipa aprobă fiecare pas și verifică rezultatul</td></tr>
+    <tr><td><b>Claude API</b> (claude-opus-5-5), opțional în aplicație</td><td>Asistentul răspunde la întrebări libere, cu datele aplicației în context</td><td>Răspunde doar din datele primite; nu decide nimic</td></tr>
+    <tr><td><b>Modelul propriu</b> <span class="mono">model.js</span>, fără AI</td><td>Toate cifrele: găleți pe oră, primul blocaj, ținta, intervențiile. Asistentul local doar le citește.</td><td>Calcul determinist, testat cu <span class="mono">test.js</span></td></tr>
+  </tbody></table></div>
+
+  <div><h2>Trei prompturi reale</h2>
+    <p class="small muted" style="margin-bottom:1mm">1 · Cerința de pornire, scrisă așa cum a fost trimisă:</p>
+    <div class="prompt">„ia linku asta si fa o clona, si pe clona sa faci chatbot, user, si un administrator si partea de user sa fie usoara sa fie pentru muncitor iar administrator pt aia de ziceai tu”</div>
+    <p class="small muted" style="margin:1.4mm 0 1mm">2 · Iterația de design:</p>
+    <div class="prompt">„fa l mai bun si profesional sa para mai produs adica”</div>
+    <p class="small muted" style="margin:1.4mm 0 1mm">3 · Promptul de sistem pe care aplicația îl trimite la Claude când întreabă un muncitor (extras):</p>
+    <div class="prompt">„Vorbești cu un muncitor de pe linie, probabil de pe telefon. Folosește propoziții scurte, cuvinte simple, cel mult 4-5 rânduri, pași numerotați când explici ceva. […] Nu-i da instrucțiuni tehnice de reparare a robotului; trimite-l la șeful de tură. […] Nu inventa date care nu sunt în context.”</div>
+  </div>
+
+  <div class="box y"><h2>Un rezultat verificat și corectat</h2>
+    <p><b>Ce a produs AI-ul:</b> ecranul muncitorului, gândit „pentru telefon”. În browserul de pe desktop arăta bine.</p>
+    <p><b>Cum am verificat:</b> l-am deschis la lățime de telefon (375 px) și am măsurat pagina: <span class="mono">scrollWidth = 487 px</span>, adică 112 px ieșeau din ecran, iar muncitorul ar fi trebuit să deruleze lateral. Am căutat elementele care depășeau marginea: grila paginii și butoanele de probleme, cu texte lungi pe care nu le rupea pe rânduri.</p>
+    <p style="margin:0"><b>Corecția:</b> coloane <span class="mono">minmax(0, 1fr)</span>, <span class="mono">min-width: 0</span> și rupere de cuvinte pe butoane. Am măsurat din nou: <span class="mono">scrollWidth = 375 px</span>, deci nimic nu mai iese din ecran. <span class="tag ok">verificat</span></p>
+  </div>
+
+  <div class="grid2">
+    <div><h2>Alte verificări</h2>
+      <ul class="small">
+        <li><b>Cifre:</b> asistentul spune 442 de găleți pe oră, iar reperul din documentație e 442. Am refăcut de mână profitul: 121 × 35% × 28% × 2 ≈ 24 de celule comandate; 20 livrate până la 31.12; 20 × 20.000 − 30.000 = 370.000; după impozitul de 16% rămân <b>310.800 €</b>. <span class="tag ok">corect</span></li>
+        <li><b>Risc găsit la verificare:</b> ținta de 300.000 € cere exact 20 de celule, deci nu există rezervă. L-am trecut în strategie.</li>
+        <li><b>Text:</b> „1 probleme deschise” a devenit „O problemă deschisă”. Butoanele moșteneau majusculele stilului vechi; am resetat stilul. <span class="tag ok">corectat</span></li>
+      </ul></div>
+    <div><h2>Ce nu lăsăm pe seama AI-ului</h2>
+      <ul class="small">
+        <li><b>Siguranța:</b> la accident, asistentul trimite mereu la șeful de tură și la 112. Nu dă instrucțiuni de reparare.</li>
+        <li><b>Cifrele</b> vin din simulare, nu sunt generate de model. Modul local e cel implicit și funcționează fără internet.</li>
+        <li><b>Datele:</b> parolele și PIN-urile se păstrează doar ca hash. Am semnalat deschis că o cheie API în browser e potrivită doar pentru test.</li>
+        <li><b>Ipotezele</b> (rate de conversie, impozit) sunt marcate ca ipoteze, nu ca fapte.</li>
+      </ul></div>
+  </div>
+
+  <div class="foot"><span>Simulatorul inițial PaletScore a fost construit anterior de echipă; acest jurnal acoperă extinderea OPS.</span><span>Date fictive</span></div>
+  <div class="hazard"></div>
+</div></body></html>

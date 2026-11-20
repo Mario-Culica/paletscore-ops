@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><title>PaletScore — Aplicație web</title><link rel="stylesheet" href="doc.css"><style>.page{gap:2.6mm} td,th{padding:1.05mm 2mm;font-size:8.5pt} .lede{font-size:10pt} .box ul{font-size:9pt} .box li{margin-bottom:.4mm} .box{padding:2.4mm 3.2mm}</style></head>
+<body><div class="page">
+  <div class="top">
+    <div class="brand"><svg width="26" height="26" viewBox="0 0 26 26"><rect width="26" height="26" rx="5" fill="#f6c300"/><g fill="#111214"><circle cx="8" cy="8" r="2.6"/><circle cx="13" cy="8" r="2.6"/><circle cx="18" cy="8" r="2.6"/><circle cx="8" cy="13" r="2.6"/><circle cx="13" cy="13" r="2.6"/><circle cx="18" cy="13" r="2.6"/><circle cx="8" cy="18" r="2.6"/><circle cx="13" cy="18" r="2.6"/></g></svg>PaletScore <small>OPS</small></div>
+    <div class="meta">AI-Powered Business Challenge 2026 · Studenți · Tech-Con / paletizare UR20<br>Echipa [cod echipă] · Livrabil: Aplicație web</div>
+  </div>
+
+  <h1>Aplicația web, <em>din telefon</em></h1>
+  <p class="lede">Un instrument simplu, din browserul telefonului: muncitorul măsoară schimbul de palet și anunță problemele, conducerea vede datele și simulează linia UR20, iar un asistent răspunde fiecăruia pe limba lui.</p>
+
+  <div class="box d" style="display:flex;justify-content:space-between;align-items:center;gap:6mm">
+    <div><span class="tag" style="background:#f6c300;color:#111">Link public</span>
+      <p style="font:800 19pt/1.1 'Barlow Condensed';margin:2mm 0 1mm;color:#fff">mario-culica.github.io/paletscore-ops</p>
+      <p class="small" style="color:#b9bdc2;margin:0">Fără instalare și fără cont la terți. Cod sursă: github.com/Mario-Culica/paletscore-ops</p></div>
+    <div id="qr" style="background:#fff;padding:2mm;border-radius:2mm;flex:none"></div>
+  </div>
+
+  <h2 style="margin-top:1mm">Testul în 3 minute</h2>
+  <table>
+    <thead><tr><th style="width:9mm">#</th><th style="width:38mm">Cine</th><th>Ce faceți</th><th style="width:52mm">Ce trebuie să vedeți</th></tr></thead>
+    <tbody>
+      <tr><td><b>1</b></td><td>Administrator</td><td>Deschideți linkul. Creați contul de administrator: nume, funcție (ex. Director de producție), parolă de minimum 6 caractere.</td><td>Panoul de administrare, cu 4 indicatori.</td></tr>
+      <tr><td><b>2</b></td><td>Administrator</td><td>Administrare → Echipa: adăugați un muncitor, de exemplu „Ion Popescu”, cu PIN-ul 1234. Apăsați Ieșire.</td><td>Muncitorul apare în tabel, „Activ”.</td></tr>
+      <tr><td><b>3</b></td><td>Muncitor</td><td>Muncitor → Ion Popescu → PIN 1234. Apăsați de 3 ori butonul galben: Paletul e plin → Încep schimbarea → Gata.</td><td>„Măsurătoare salvată”; durata apare la „Azi”.</td></tr>
+      <tr><td><b>4</b></td><td>Muncitor</td><td>Meniul de jos → Probleme → „Lipsă paleți goi” → Trimite. Apoi Asistent: „Robotul s-a oprit”.</td><td>Anunțul are starea „Trimis”; asistentul dă 3 pași simpli, cu siguranța întâi.</td></tr>
+      <tr><td><b>5</b></td><td>Administrator</td><td>Intrați din nou ca administrator. Măsurători → „Folosește în simulare”. Probleme → „Rezolvat”.</td><td>Timpul măsurat intră în „Linia ta”; muncitorul vede „Rezolvat”.</td></tr>
+      <tr><td><b>6</b></td><td>Administrator</td><td>În simulare: „Demo 45 s”, apoi la „Ținta” cereți 430 de găleți pe oră și apăsați „+30 s”.</td><td>Cea mai lungă schimbare permisă: 6:09; cu +30 s linia scade la 401 găleți.</td></tr>
+      <tr><td><b>7</b></td><td>Oricine</td><td>Introduceți „-3” sau „abc” la debit.</td><td>Mesaj de corectare; simularea nu pornește cu date greșite.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2" style="margin-top:1mm">
+    <div class="box"><h2>Două roluri, două interfețe</h2>
+      <ul>
+        <li><b>Muncitor</b>: intră cu numele și un PIN de 4 cifre. Un singur buton mare, care își schimbă textul la fiecare pas, butoane-imagine pentru probleme și un meniu jos.</li>
+        <li><b>Administrator</b>: director de producție, director financiar, responsabil SSM sau șef de tură. Vede simularea, echipa, măsurătorile (export CSV) și problemele.</li>
+      </ul></div>
+    <div class="box"><h2>Asistentul</h2>
+      <ul>
+        <li><b>Mod local</b> (implicit): răspunde din simularea liniei, fără internet și fără cheie: starea liniei, primul blocaj, intervenția recomandată, timpul disponibil pentru schimb.</li>
+        <li><b>Mod Claude</b> (opțional): administratorul adaugă o cheie API; răspunsurile primesc datele aplicației în context. Dacă apelul eșuează, se revine la răspunsul local.</li>
+      </ul></div>
+  </div>
+
+  <div class="box y small"><b>Limitele prototipului, spuse direct.</b> Nu există server: conturile, măsurătorile și problemele stau în browserul telefonului folosit, deci muncitorul și administratorul văd aceleași date doar pe același dispozitiv. Parolele și PIN-urile se păstrează doar ca hash. Toate datele sunt fictive. Reperele PURATOS (7,4 găleți/min la 13 kg, 44 de găleți pe palet) sunt rezultate de test, nu garanții. Pentru o fabrică reală urmează un backend cu bază de date comună.</div>
+
+  <div class="foot"><span>PaletScore OPS v2.0 · prototip</span><span>Nu este un site Tech-Con sau PURATOS. Date fictive.</span></div>
+  <div class="hazard"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>new QRCode(document.getElementById('qr'), { text: 'https://mario-culica.github.io/paletscore-ops/', width: 92, height: 92, correctLevel: QRCode.CorrectLevel.M });</script>
+</body></html>
